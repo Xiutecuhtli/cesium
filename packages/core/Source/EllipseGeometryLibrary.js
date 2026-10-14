@@ -138,13 +138,9 @@ EllipseGeometryLibrary.computeEllipsePositions = function (
   const northVec = Cartesian3.cross(unitPos, eastVec, northVecScratch);
 
   // The number of points in the first quadrant
-  let numPts = 1 + Math.ceil(CesiumMath.PI_OVER_TWO / granularity);
+  let numPts = Math.ceil(CesiumMath.PI_OVER_TWO / granularity);
 
-  const deltaTheta = CesiumMath.PI_OVER_TWO / (numPts - 1);
-  let theta = CesiumMath.PI_OVER_TWO - numPts * deltaTheta;
-  if (theta < 0.0) {
-    numPts -= Math.ceil(Math.abs(theta) / deltaTheta);
-  }
+  const deltaTheta = CesiumMath.PI_OVER_TWO / numPts;
 
   // If the number of points were three, the ellipse
   // would be tessellated like below:
@@ -182,7 +178,7 @@ EllipseGeometryLibrary.computeEllipsePositions = function (
   let interiorPosition;
 
   // Compute points in the 'eastern' half of the ellipse
-  theta = CesiumMath.PI_OVER_TWO;
+  let theta = CesiumMath.PI_OVER_TWO;
   position = pointOnEllipsoid(
     theta,
     rotation,
