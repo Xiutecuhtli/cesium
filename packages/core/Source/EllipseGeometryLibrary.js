@@ -141,7 +141,7 @@ EllipseGeometryLibrary.computeEllipsePositions = function (
   let numPts = 1 + Math.ceil(CesiumMath.PI_OVER_TWO / granularity);
 
   const deltaTheta = CesiumMath.PI_OVER_TWO / (numPts - 1);
-  let theta = CesiumMath.PI_OVER_TWO - numPts * deltaTheta;
+  let theta =  -deltaTheta;
   if (theta < 0.0) {
     numPts -= Math.ceil(Math.abs(theta) / deltaTheta);
   }
